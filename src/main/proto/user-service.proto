@@ -1,0 +1,27 @@
+syntax = "proto3";
+option java_multiple_files = true;
+import "google/protobuf/empty.proto";
+package org.rosatom.jwtauthentication;
+
+message JwtRequest {
+    string userName = 1;
+    string password = 2;
+}
+
+message JwtToken{
+    string jwtToken = 1;
+}
+
+message User {
+    string name = 1;
+    string surname = 2;
+    int32 age = 3;
+}
+
+service UserService{
+    rpc getUserInfo(google.protobuf.Empty) returns (User){};
+}
+
+service AuthService{
+rpc authenticate(JwtRequest) returns (JwtToken){};
+}
